@@ -1,4 +1,6 @@
 
+// based on 0-based indexing 
+// will return index of the searching element
 int binarySearch(vector<int > arr, int x){
     int n  = arr.size();
     int low = 0;
