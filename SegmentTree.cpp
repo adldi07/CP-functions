@@ -1,4 +1,5 @@
 // Segment Tree
+// finding the minimum element in a range
 
 // Segment Tree is a data structure that allows us to perform range queries and updates on an array efficiently.
 // It is particularly useful for problems that involve finding the minimum, maximum, or sum of elements in a range.
