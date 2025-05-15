@@ -1,7 +1,12 @@
 
 // based on 0-based indexing 
 // will return index of the searching element
-int binarySearch(vector<int > arr, int x){
+// if not found return -1
+// Time complexity: O(log n)
+// Space complexity: O(1)
+// Binary Search
+// Binary Search is an efficient algorithm for finding an item from a sorted list of items.
+int binarySearch( vector<int > arr, int x){
     int n  = arr.size();
     int low = 0;
     int high = n-1;
@@ -17,5 +22,6 @@ int binarySearch(vector<int > arr, int x){
             high = mid - 1;
         }
     }
+    return -1; // element not found
 }
 
