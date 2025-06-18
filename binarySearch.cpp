@@ -6,7 +6,7 @@
 // Space complexity: O(1)
 // Binary Search
 // Binary Search is an efficient algorithm for finding an item from a sorted list of items.
-int binarySearch( vector<int > arr, int x){
+int binarySearch( vector<int > &arr, int x){
     int n  = arr.size();
     int low = 0;
     int high = n-1;
