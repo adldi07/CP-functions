@@ -16,3 +16,6 @@ int numberOfSubarrayWithSumSum(vector<int> &a ,int sum){
     }
     return ans;
 }
+
+// TC : O(nlogn)
+// SC : O(n)

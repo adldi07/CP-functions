@@ -75,7 +75,8 @@ private:
     
     // Combine function - modify based on problem requirements
     T combine(T a, T b) {
-        return a + b;  // Change to min(a,b), max(a,b), a^b, etc. as needed
+        return a + b;  
+        //***** */ Change to min(a,b), max(a,b), a^b, etc. as needed
     }
     
     // Build the tree
