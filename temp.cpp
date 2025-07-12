@@ -171,7 +171,7 @@ class SegT{
 };
 
 
-void JBK() {
+void JBKSegTree() {
 
     int n;
     cin>>n;
@@ -206,6 +206,16 @@ void JBK() {
       }
     }
     
+}
+
+class FenTree {
+    
+};
+
+void JBK(){
+
+
+
 }
 
 

@@ -17,13 +17,12 @@ private:
     int n;
     
 public:
-    // Constructor - initialize with size n (1-indexed)
+    
     FenwickTree(int size) {
         n = size;
         tree.assign(n + 1, 0);
     }
     
-    // Constructor - initialize with array (0-indexed input, 1-indexed internally)
     FenwickTree(vector<int>& arr) {
         n = arr.size();
         tree.assign(n + 1, 0);
@@ -31,83 +30,51 @@ public:
             update(i + 1, arr[i]);
         }
     }
-    
-    // Add val to position idx (1-indexed)
+
     void update(int idx, long long val) {
-        for (int i = idx; i <= n; i += i & (-i)) {
-            tree[i] += val;
+        for (int i = idx; i <= n; i +=(i & (-i))) {
+            tree[i]+= val;
         }
     }
     
-    // Get prefix sum from 1 to idx (1-indexed)
     long long query(int idx) {
         long long sum = 0;
-        for (int i = idx; i > 0; i -= i & (-i)) {
+        for (int i = idx; i > 0; i -= (i&(-i))) {
             sum += tree[i];
         }
         return sum;
     }
     
-    // Get range sum from l to r (1-indexed, inclusive)
+    // sum from l to r (1-indexed, inclusive)
     long long rangeQuery(int l, int r) {
         return query(r) - query(l - 1);
     }
     
-    // Set position idx to val (1-indexed)
+    // set position idx to val (1- indexed)
     void set(int idx, long long val) {
-        long long current = rangeQuery(idx, idx);
-        update(idx, val - current);
+        long long current =rangeQuery(idx, idx);
+        update(idx, (val - current));
     }
     
-    // Get value at position idx (1-indexed)
+    // value at position idx (1-indexed)
     long long get(int idx) {
         return rangeQuery(idx, idx);
     }
     
-    // Find the largest idx such that prefix sum <= k
-    // Returns 0 if no such index exists
-    int lowerBound(long long k) {
-        int idx = 0;
-        for (int b = __builtin_clz(1) - __builtin_clz(n); b >= 0; b--) {
-            if (idx + (1 << b) <= n && tree[idx + (1 << b)] <= k) {
-                k -= tree[idx + (1 << b)];
-                idx += (1 << b);
-            }
-        }
-        return idx;
-    }
-    
-    // Find the smallest idx such that prefix sum >= k
-    // Returns n+1 if no such index exists
-    int upperBound(long long k) {
-        int idx = 0;
-        for (int b = __builtin_clz(1) - __builtin_clz(n); b >= 0; b--) {
-            if (idx + (1 << b) <= n && tree[idx + (1 << b)] < k) {
-                k -= tree[idx + (1 << b)];
-                idx += (1 << b);
-            }
-        }
-        return idx + 1;
-    }
-    
-    // Clear all values
+    // clear all values
     void clear() {
         fill(tree.begin(), tree.end(), 0);
     }
     
-    // Get size of the tree
-    int size() {
-        return n;
-    }
-    
-    // Debug function - print the tree state
+    // debug function- print the tree state values 
     void debug() {
-        cout << "Tree state: ";
+        cout<<"Tree state: ";
         for (int i = 1; i <= n; i++) {
-            cout << get(i) << " ";
+            cout <<tree[i]<< " ";
         }
-        cout << "\n";
+        cout<<endl;
     }
+
 };
 
 // 2D Fenwick Tree for matrix operations
@@ -125,29 +92,31 @@ public:
     
     // Add val to position (x, y) (1-indexed)
     void update(int x, int y, long long val) {
-        for (int i = x; i <= n; i += i & (-i)) {
-            for (int j = y; j <= m; j += j & (-j)) {
+        for (int i =x; i<= n; i += i & (-i)) {
+            for (int j =y; j<= m; j += j & (-j)) {
                 tree[i][j] += val;
             }
         }
     }
     
-    // Get sum of rectangle from (1,1) to (x,y) (1-indexed)
+    //  sum of rectangle from (1 ,1) to (x,y) (1- indexed)
     long long query(int x, int y) {
         long long sum = 0;
-        for (int i = x; i > 0; i -= i & (-i)) {
-            for (int j = y; j > 0; j -= j & (-j)) {
+        for (int i = x;i > 0; i -= i & (-i)) {
+            for (int j = y;j > 0; j -= j & (-j)) {
                 sum += tree[i][j];
             }
         }
         return sum;
     }
     
-    // Get sum of rectangle from (x1,y1) to (x2,y2) (1-indexed, inclusive)
-    long long rangeQuery(int x1, int y1, int x2, int y2) {
+    // sum of rectangle from (x1,y1) to (x2, y2) (1-indexed, inclusive)
+    long long rangeQuery(int x1, int y1,int x2, int y2) {
         return query(x2, y2) - query(x1 - 1, y2) - query(x2, y1 - 1) + query(x1 - 1, y1 - 1);
     }
 };
+
+
 
 // Usage examples:
 // /*
