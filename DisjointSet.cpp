@@ -37,11 +37,14 @@ class DisjointSet {
   void unionBySize(int u, int v){
     int ulp = findParent(u);
     int vlp = findParent(v);
+    if(vlp==ulp) return ;
     if(size[ulp]>size[vlp]){
       parent[vlp] = ulp;
+      size[ulp]+= size[vlp];
     }
     else{
       parent[ulp] = vlp;
+      size[vlp]+= size[ulp];
     }
   }
 };
