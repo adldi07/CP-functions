@@ -78,97 +78,102 @@ void print(vector<int > ans , bool newline=0){
 // comment the optimization before debugging
 // ALWAYS USE FIXED << SETPRECISION WHILE OUTPUTTING FLOATS
 
+int del[5] = {-1 , 0 , 1 , 0 , -1};
+char delchar[4] = {'u' , 'r' , 'd' , 'l'};
 
-void JBKA() {
-
-    int n ;
-    cin>>n;
-    vector<int > a(n);
-    for(int i =0 ; i<n;i++){
-      cin>>a[i];
-    }
-    int ans = 1;
-    for(int i =0 ; i<n;i++){
-      int temp ;
-      cin>>temp ;
-      if(temp<a[i]){
-        ans+= a[i]-temp;
+string findShortestWay(vector<vector<int>>& maze, vector<int>& ball, vector<int>& hole) {
+  
+    int n = maze.size();
+    int m = maze[0].size();
+    
+    int br = ball[0];
+    int bc = ball[1];
+    int hr = hole[0];
+    int hc = hole[1];
+    
+    vector<vector<string >> ans(n , vector<string> (m , ""));
+    vector<vector<int >> dist(n , vector<int > (m , 1e7));
+    queue<pair<int , int >> q;
+    
+    q.push({br , bc});
+    dist[br][bc] = 0;
+    
+    while(!q.empty()){
+      auto el = q.front();
+      q.pop();
+      int x = el.first;
+      int y = el.second;
+      for(int i =0 ; i<4;i++){
+        int r = x;
+        int c = y;
+        int dr = del[i];
+        int dc = del[i+1];
+        int steps = dist[r][c];
+        while((r+dr>=0 && r+dr<n) && (c+dc>=0 && c+dc<m) && maze[r+dr][c+dc]==0 && (r!=hr || c!=hc)){
+          r+= dr;
+          c+= dc;
+          steps++;
+        }
+        
+        if(dist[r][c]>steps || (dist[r][c]==steps && ans[x][y] + delchar[i] < ans[r][c])){
+          dist[r][c] = steps;
+          ans[r][c] = ans[x][y] + delchar[i];
+          if(r!= hr || c!= hc)  q.push({r , c});
+        }
+        
       }
     }
+    // return ans ;
     
-    cout<<ans;
-
-}
-
-void JBKB(){
-  
-    int n;
-    cin>>n;
-    vector<int > ans;
-    // if(n==2){
-    //   ans.push_back(-1);
-    //   ans.push_back(2);
-    //   print(ans);
-    //   return ;
-    // }
-    for(int i =1 ; i<= n-1;i++){
-      if(i&1){
-        ans.push_back(-1);
-      }
-      else{
-        ans.push_back(3);
-      }
-    }
-    if(n&1) ans.push_back(-1);
-    else ans.push_back(2);
-    
-    print(ans);
-  
-}
-
-
-int dfs(vector<vector<int >>&adj , int ind , int par){
-  
-    if(adj[ind].size()==0) return 0;
-    
-    int ans = (adj[ind].size() - 1);
-    for(auto it : adj[ind]){
-      if(it==par) continue ;
-      ans += dfs(adj , it , ind); 
-    }
-    
-    return ans ;
+    return ans[hr][hc] == "" ? "impossible" : ans[hr][hc];
   
 }
 
-void JBK(){
-  
-    int n ;
-    cin>>n;
-    vector<vector<int >> adj(n);
-    for(int i =0 ; i< n-1; i++){
-      int u , v;
-      cin>>u>>v;
-      u--;
-      v--;
-      adj[u].push_back(v);
-      adj[v].push_back(u);
-    }
-    
-    int ind = -1 ;
-    int maxi = -1e6;
-    for(int i =0 ; i<n;i++){
-      if(adj[i].size() > maxi){
-        ind = i;
-        maxi = adj[i].size();
-      }
-    }
-    // cout<<"dh :"<<ind<<endl;
-    
-    int ans = dfs(adj , ind , -1);
-    cout<<ans;
-    
-  
+
+void JBK() {
+
+    vector<vector<int >> maze = {
+      {0,0,0,0,0},
+      {1,1,0,0,1},
+      {0,0,0,0,0},
+      {0,1,0,0,1},
+      {0,1,0,0,0}
+      },
+      maze1 = {
+        {0,0,0,0,0},
+        {1,1,0,0,1},
+        {0,0,0,0,0},
+        {0,1,0,0,1},
+        {0,1,0,0,0}
+        
+      },
+      
+      maze2 = {
+        {0,0,0,0,0,0,0},
+        {0,0,1,0,0,1,0},
+        {0,0,0,0,1,0,0},
+        {0,0,0,0,0,0,1}
+        };
+      
+      vector<int> ball = {4,3},
+      hole = {0,1} ,
+      ball1 = {4,3},
+      hole1 = {3,0},
+      ball2 = {0,4},
+      hole2 = {3,5};
+      
+      
+      
+      string ans = findShortestWay(maze1 , ball1 , hole1);
+      cout<<ans;
+      
+      // vector<vector<string>> ans = findShortestWay(maze2 , ball2 , hole2);
+      // for(int i =0 ; i<ans.size();i++){
+      //   for(int j =0 ; j<ans[0].size();j++){
+      //     cout<<ans[i][j]<<" ";
+      //   }
+      //   nl;
+      // }
 }
 
 
@@ -177,7 +182,7 @@ int32_t main() {
     fastIO;
  
     int t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--) {
         JBK();
         cout<<endl;
