@@ -1,17 +1,3 @@
-#include <bits/stdc++.h>
- 
-using namespace std;
-#define MOD 1000000007
-#define int long long
-
-#define fastIO                                                                 \
-    ios::sync_with_stdio(false);                                               \
-    cin.tie(NULL);                                                             \
-    cout.tie(NULL);                                                            \
-    cout.precision(numeric_limits<double>::max_digits10);
-
-
-
 class FenwickTree {
     vector<int > tree;
     int n ;
@@ -57,32 +43,33 @@ class FenwickTree {
 
 };
 
-void JBK() {
 
-    int n ;
-    cin>> n;
-    vector<int > arr(n);
-    for(int i=0;i<n;i++){
-        cin>>arr[i];
-    }
-    FenwickTree ft(n);
-    ft.build(arr);
-    cout<<"Before update: "<<ft.query(0, n-1)<<endl;
-    ft.update(1,10,arr);
-    cout<<"After update: "<<ft.query(0, n-1)<<endl;
+// void JBK() {
+
+//     int n ;
+//     cin>> n;
+//     vector<int > arr(n);
+//     for(int i=0;i<n;i++){
+//         cin>>arr[i];
+//     }
+//     FenwickTree ft(n);
+//     ft.build(arr);
+//     cout<<"Before update: "<<ft.query(0, n-1)<<endl;
+//     ft.update(1,10,arr);
+//     cout<<"After update: "<<ft.query(0, n-1)<<endl;
     
-}
+// }
 
 
  
-int32_t main() {
-    fastIO;
+// int32_t main() {
+//     fastIO;
  
-    int t = 1;
-    // cin >> t;
-    while (t--) {
-        JBK();
-        cout<<endl;
-    }
-    return 0;
-}
+//     int t = 1;
+//     // cin >> t;
+//     while (t--) {
+//         JBK();
+//         cout<<endl;
+//     }
+//     return 0;
+// }
