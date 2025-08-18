@@ -79,11 +79,14 @@ public:
     
 };
 
+/*
 
-// --> void dsu(n) -- constructer
-// --> int find(a) -- finding ultimate parent of a
-// --> void bind(a , b) -- connect a & b
-// --> bool connected(a , b) -- true if a & b are connected
-// --> int getSize(a) -- return the size of component of a
-// --> int getComponents(a) -- return the no. of connected component
-// --> void printState() -- print parent rank size vector 
+--> void dsu(n) -- constructer
+--> int find(a) -- finding ultimate parent of a
+--> void bind(a , b) -- connect a & b
+--> bool connected(a , b) -- true if a & b are connected
+--> int getSize(a) -- return the size of component of a
+--> int getComponents(a) -- return the no. of connected component
+--> void printState() -- print parent rank size vector 
+
+*/

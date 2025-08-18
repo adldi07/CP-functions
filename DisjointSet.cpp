@@ -48,3 +48,10 @@ class DisjointSet {
     }
   }
 };
+
+/*
+==> VECTOR  -->  rank , parent , size
+==> FUNCTIONS  -->  findParent(int node) ----- give parent of node
+                    unionByRank(int u , int v)  ----  unite u and v on basis of Rank
+                    unionBySize(int u , int v)  ----  unite u and v on basis of size of component
+*/
