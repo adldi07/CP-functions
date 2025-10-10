@@ -89,4 +89,7 @@ public:
 --> int getComponents(a) -- return the no. of connected component
 --> void printState() -- print parent rank size vector 
 
+--> using 0 based indexing and node 
+--> using every variable with all small letters 
+
 */
