@@ -43,6 +43,9 @@ private:
 
         //no overlap 
         if (low > r || high < l) return;
+
+        // edit: - no need to consider the case - r<l - because it will never happen 
+        //  -- if l+1 = r ===== mid = l and mid+1 = r ====== then on next iteration - either no overlap or complete overlap case will be satisfied
         
         //complete overlap
         if (low >= l && high <= r) {
